@@ -9,8 +9,8 @@ class Solution {
         } else {
             M = nums[n / 2];
         }
-        for (int i = 0; i < n; i++) {
-            count += Math.abs(nums[i] - M);
+        for (int t : nums) {
+            count += Math.abs(t - M);
         }
         return count;
     }
