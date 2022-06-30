@@ -3,15 +3,14 @@ class Solution {
         int count = 0;
         Arrays.sort(nums);
         int M = -1;
+        int n = nums.length;
         if ((nums.length & 1) == 0) {
-            int x = nums[(nums.length - 1) / 2];
-            int y = nums[(nums.length) / 2];
-            M = (x + y) / 2;
+            M = (nums[(n - 1) / 2] + nums[n / 2]) / 2;
         } else {
-            M = nums[nums.length / 2];
+            M = nums[n / 2];
         }
-        for (int n : nums) {
-            count += Math.abs(n - M);
+        for (int t : nums) {
+            count += Math.abs(t - M);
         }
         return count;
     }
