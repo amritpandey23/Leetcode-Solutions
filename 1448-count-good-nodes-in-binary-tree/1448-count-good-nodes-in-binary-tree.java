@@ -22,9 +22,9 @@ class Solution {
         if (root == null) {
             return 0;
         }
-        if (root.val >= prevValue) {
-            return 1 + goodNodes(root.left, Math.max(prevValue, root.val)) + goodNodes(root.right, Math.max(prevValue, root.val));
-        }
-        return goodNodes(root.left, Math.max(prevValue, root.val)) + goodNodes(root.right, Math.max(prevValue, root.val));
+        return 
+            goodNodes(root.left, Math.max(prevValue, root.val)) + 
+            goodNodes(root.right, Math.max(prevValue, root.val)) +
+            (root.val >= prevValue ? 1 : 0);
     }
 }
