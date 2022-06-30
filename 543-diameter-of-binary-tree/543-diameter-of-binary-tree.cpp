@@ -11,14 +11,13 @@
  */
 class Solution {
 public:
-    int maxDia = 0;
-    
     int diameterOfBinaryTree(TreeNode* root) {
         findDiameter(root);
         return maxDia;
     }
-    
-    int findDiameter(TreeNode* root) {
+private:
+    int maxDia = 0;
+    int findDiameter(const TreeNode* root) {
         if (!root) {
             return 0;
         }
