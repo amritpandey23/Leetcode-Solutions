@@ -10,44 +10,21 @@
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        List<TreeNode> path1 = new ArrayList<>();
-        List<TreeNode> path2 = new ArrayList<>();
-        constructPath(path1, root, p);
-        constructPath(path2, root, q);
-        int i, j;
-        i = path1.size() - 1;
-        j = path2.size() - 1;
-        while (i >= 0 && j >= 0) {
-            if (path1.get(i).val != path2.get(j).val) {
-                return path1.get(i + 1);
-            }
-            i--;
-            j--;
+        // found either of p or q first
+        if (root.val == p.val || root.val == q.val) {
+            return root;
         }
-        if (i < 0) {
-            return path1.get(0);
+        // if p lies to left and q lies to right or vice-versa
+        if (
+            (root.val > p.val && root.val < q.val) ||
+            (root.val < p.val && root.val > q.val)
+        ) {
+            return root;
         }
-        return path2.get(0);
-    }
-    
-    private boolean constructPath(List<TreeNode> path, TreeNode root, TreeNode sn) {
-        if (root == null) {
-            return false;
+        // both p, q lies either to left or right subtrees
+        if (root.val > p.val) {
+            return lowestCommonAncestor(root.left, p, q);
         }
-        if (root == sn) {
-            path.add(root);
-            return true;
-        }
-        boolean isOnLeft = constructPath(path, root.left, sn);
-        if (isOnLeft) {
-            path.add(root);
-            return true;
-        }
-        boolean isOnRight = constructPath(path, root.right, sn);
-        if (isOnRight) {
-            path.add(root);
-            return true;
-        }
-        return false;
+        return lowestCommonAncestor(root.right, p, q);
     }
 }
