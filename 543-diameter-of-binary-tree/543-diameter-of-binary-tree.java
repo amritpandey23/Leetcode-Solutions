@@ -14,20 +14,20 @@
  * }
  */
 class Solution {
-    int maxDia = 0;
+    private int maxDia = 0;
     
     public int diameterOfBinaryTree(TreeNode root) {
         findMaxDia(root);
-        return maxDia - 1;    
+        return maxDia;    
     }
     
-    public int findMaxDia(TreeNode root) {
+    private int findMaxDia(TreeNode root) {
         if (root == null) {
             return 0;
         }
         int lh = findMaxDia(root.left);
         int rh = findMaxDia(root.right);
-        maxDia = Math.max(maxDia, lh + rh + 1);
+        maxDia = Math.max(maxDia, lh + rh);
         return Math.max(lh, rh) + 1;
     }
 }
