@@ -15,11 +15,11 @@
  */
 class Solution {
     public List<Integer> largestValues(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<Integer>();
-        }
         List<Integer> Ans = new ArrayList<>();
-        ArrayDeque<TreeNode> Queue = new ArrayDeque<>();
+        if (root == null) {
+            return Ans;
+        }
+        Queue<TreeNode> Queue = new LinkedList<>();
         Queue.offer(root);
         while (!Queue.isEmpty()) {
             int size = Queue.size();
