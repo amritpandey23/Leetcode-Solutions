@@ -16,8 +16,8 @@
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> Ans = new ArrayList<>();
-        TreeNode curr, pre;
-        curr = root;
+        TreeNode curr = root;
+        TreeNode pre;
         while (curr != null) {
             if (curr.left == null) {
                 Ans.add(curr.val);
