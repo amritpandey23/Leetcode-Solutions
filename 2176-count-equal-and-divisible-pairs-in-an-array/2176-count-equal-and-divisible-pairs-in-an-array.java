@@ -1,18 +1,22 @@
 class Solution {
     public int countPairs(int[] nums, int k) {
         int n = nums.length;
-        List<int[]> divisiblePairs = new ArrayList<>();
+        TreeMap<Integer, List<Integer>> map = new TreeMap<>();
         for (int i = 0; i < n; ++i) {
-            for (int j = i + 1; j < n; ++j) {
-                if ((i * j) % k == 0) {
-                    divisiblePairs.add(new int[]{i, j});
-                }
+            if (map.get(nums[i]) == null) {
+                map.put(nums[i], new ArrayList<>());
             }
+            map.get(nums[i]).add(i);
         }
         int Ans = 0;
-        for (int[] d : divisiblePairs) {
-            if (nums[d[0]] == nums[d[1]]) {
-                Ans++;
+        for (Map.Entry<Integer, List<Integer>> entry : map.entrySet()) {
+            List<Integer> indexes = entry.getValue();
+            for (int i = 0; i < indexes.size(); ++i) {
+                for (int j = i + 1; j < indexes.size(); ++j) {
+                    if ((indexes.get(i) * indexes.get(j)) % k == 0) {
+                        Ans++;
+                    }
+                }
             }
         }
         return Ans;
