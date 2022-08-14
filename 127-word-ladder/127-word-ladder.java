@@ -4,26 +4,33 @@ class Solution {
         if (!words.contains(endWord)) {
             return 0;
         }
-        ArrayDeque<String> Queue = new ArrayDeque<>();
-        Queue.offer(beginWord);
-        int level = 0;
-        while (!Queue.isEmpty()) {
-            level++;
-            int size = Queue.size();
-            for (int c = 0; c < size; ++c) {
-                String curr = Queue.poll();
-                if (curr.equals(endWord)) {
-                    return level;
-                }
-                List<String> neigh = neighbors(curr);
+        Set<String> beginSet = new HashSet<>();
+        Set<String> endSet = new HashSet<>();
+        beginSet.add(beginWord);
+        endSet.add(endWord);
+        int length = 1;
+        while (!beginSet.isEmpty() && !endSet.isEmpty()) {
+            if (beginSet.size() > endSet.size()) {
+                Set<String> tmp = beginSet;
+                beginSet = endSet;
+                endSet = tmp;
+            }
+            Set<String> newBeginSet = new HashSet<>();
+            for (String word : beginSet) {
+                List<String> neigh = neighbors(word);
                 for (String nbr : neigh) {
+                    if (endSet.contains(nbr)) {
+                        return length + 1;
+                    }
                     if (words.contains(nbr)) {
-                        Queue.offer(nbr);
+                        newBeginSet.add(nbr);
                         words.remove(nbr);
                     }
                 }
             }
-        }
+            beginSet = newBeginSet;
+            length++;
+        } 
         return 0;
     }
     
