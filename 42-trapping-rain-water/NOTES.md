@@ -1,1 +1,3 @@
+**Approach 1** : Keep leftmax and rightmax array. Then at any index the volume of water stored is min(leftMax[i], rightMax[i]) - height[i]. Sum all the volume at every index.
 ​
+**Approach 2** : Using two pointers. We keep leftMax and rightMax as two pointers from left and right. If leftMax is less than or equal rightMax we move left pointer else right pointer. Also at each index we calculate the value of `leftMax - height[i]` or `rightMax - height[i]` to store the volume.
