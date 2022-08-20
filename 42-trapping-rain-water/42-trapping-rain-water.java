@@ -1,21 +1,29 @@
 class Solution {
     public int trap(int[] height) {
-        int n = height.length;
-        int[] leftMax = new int[n];
-        int[] rightMax = new int[n];
-        leftMax[0] = height[0];
-        rightMax[n - 1] = height[n - 1];
-        int volTrapped = 0;
-        for (int i = 1; i < n; i++) {
-            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+        int n, l, r, maxL, maxR, vol;
+        
+        n = height.length;
+        l = 0;
+        r = n - 1;
+        n = height.length;
+        maxL = height[l];
+        maxR = height[r];
+        l++;
+        r--;
+        vol = 0;
+        
+        while (l <= r) {
+            if (maxL <= maxR) {
+                vol += maxL - height[l] < 0 ? 0 : maxL - height[l];
+                maxL = Math.max(maxL, height[l]);
+                l++;
+            } else {
+                vol += maxR - height[r] < 0 ? 0 : maxR - height[r];
+                maxR = Math.max(maxR, height[r]);
+                r--;
+            }
         }
-        for (int i = n - 2; i >= 0; i--) {
-            rightMax[i] = Math.max(rightMax[i + 1], height[i]);
-        }
-        for (int i = 0; i < n; i++) {
-            int vol = (Math.min(leftMax[i], rightMax[i]) - height[i]);
-            volTrapped += vol;
-        }
-        return volTrapped;
+        
+        return vol;
     }
 }
